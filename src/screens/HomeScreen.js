@@ -6,10 +6,11 @@ import {
   View,
   TextInput,
   Pressable,
+  ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { getSimpsonsApi } from "../api/simpsonsAPI";
+import { getQuotesByCharacter, getSimpsonsApi } from "../api/simpsonsAPI";
 
 export default function HomeScreen({ navigation }) {
   const [text, onChangeText] = useState("");
@@ -19,10 +20,18 @@ export default function HomeScreen({ navigation }) {
     getSimpsonsApi()
       .then((response) => {
         setData(response[0]);
-        navigation.navigate("Error");
       })
-      .catch((error) => {
-        console.log("error", error);
+      .catch(() => {
+        navigation.navigate("Error");
+      });
+  };
+
+  const getQuotesByText = () => {
+    getQuotesByCharacter(text)
+      .then((response) => {
+        setData(response[0]);
+      })
+      .catch(() => {
         navigation.navigate("Error");
       });
   };
@@ -47,6 +56,7 @@ export default function HomeScreen({ navigation }) {
           <TextInput
             style={styles.input}
             onChangeText={onChangeText}
+            onEndEditing={getQuotesByText}
             value={text}
             placeholder="Search"
           />
@@ -54,7 +64,9 @@ export default function HomeScreen({ navigation }) {
       </View>
       <View style={styles.card}>
         <View style={styles.quoteContainer}>
-          <Text style={styles.quoteText}> {data.quote} </Text>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <Text style={styles.quoteText}> {data.quote} </Text>
+          </ScrollView>
           <Image
             style={styles.characterImage}
             resizeMode="contain"
@@ -123,6 +135,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     borderRadius: 10,
     alignItems: "center",
+    width: "100%",
   },
   quoteContainer: {
     flex: 1,
@@ -131,13 +144,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     backgroundColor: "white",
     padding: 20,
+    paddingRight: 0,
     borderRadius: 10,
     width: "100%",
     overflow: "hidden",
   },
   quoteText: {
     fontSize: 18,
-    width: "70%",
+    width: "80%",
   },
   characterImage: {
     width: 100,
