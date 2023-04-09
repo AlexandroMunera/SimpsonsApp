@@ -108,10 +108,11 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   searchText: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontFamily: "LondrinaSolid",
+    fontSize: 22,
     color: "white",
     marginLeft: 10,
+    textAlign: "center",
   },
   input: {
     height: 40,
@@ -122,6 +123,8 @@ const styles = StyleSheet.create({
     color: "#898989",
     borderRadius: 10,
     marginTop: 25,
+    fontFamily: "MergeOne-Regular",
+    fontSize: 18,
   },
   card: {
     minHeight: 350,
@@ -148,6 +151,7 @@ const styles = StyleSheet.create({
   quoteText: {
     fontSize: 18,
     width: "80%",
+    fontFamily: "MergeOne-Regular",
   },
   characterImage: {
     width: 100,
@@ -156,9 +160,9 @@ const styles = StyleSheet.create({
   },
   quoteAuthor: {
     color: "black",
-    fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 22,
     marginTop: 10,
+    fontFamily: "LondrinaSolid",
   },
   button: {
     width: "60%",
@@ -172,5 +176,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 18,
+    fontFamily: "MergeOne-Regular",
   },
 });
