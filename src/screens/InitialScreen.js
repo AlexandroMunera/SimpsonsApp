@@ -27,7 +27,6 @@ export default function InitialScreen({ navigation }) {
   useEffect(() => {
     return sound
       ? () => {
-          console.log("Unloading Sound");
           sound.unloadAsync();
         }
       : undefined;

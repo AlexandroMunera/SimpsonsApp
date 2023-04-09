@@ -7,6 +7,7 @@ import { useFonts } from "expo-font";
 let customFonts = {
   LondrinaSolid: require("./assets/fonts/LondrinaSolid.ttf"),
   "MergeOne-Regular": require("./assets/fonts/MergeOne-Regular.ttf"),
+  "LondrinaShadow-Regular": require("./assets/fonts/LondrinaShadow-Regular.ttf"),
 };
 
 export default function App() {

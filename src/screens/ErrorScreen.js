@@ -32,25 +32,27 @@ const styles = StyleSheet.create({
   },
 
   text404: {
-    fontSize: 80,
+    fontSize: 130,
     color: "#000000",
     textAlign: "center",
-    marginTop: 70,
+    marginTop: 90,
+    fontFamily: "LondrinaShadow-Regular",
   },
   textContainer: {
     width: "80%",
-    marginBottom: 50,
+    marginBottom: 80,
   },
   errorTitle: {
     fontSize: 40,
-    fontWeight: "bold",
+    fontFamily: "LondrinaSolid",
+
     color: "#000000",
     textAlign: "center",
   },
   errorText: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 30,
     color: "#000000",
     textAlign: "center",
+    fontFamily: "LondrinaSolid",
   },
 });

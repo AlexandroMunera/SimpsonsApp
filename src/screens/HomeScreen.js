@@ -9,6 +9,7 @@ import {
   ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Shadow } from "react-native-shadow-2";
 
 import { getQuotesByCharacter, getSimpsonsApi } from "../api/simpsonsAPI";
 
@@ -75,9 +76,19 @@ export default function HomeScreen({ navigation }) {
         <Text style={styles.quoteAuthor}>{data.character}</Text>
       </View>
 
-      <Pressable style={styles.button} onPress={getQuotes}>
-        <Text style={styles.buttonText}>Show me more</Text>
-      </Pressable>
+      <Shadow
+        viewStyle={styles.shadow}
+        startColor="#072A4233"
+        finalColor="transparent"
+        offset={[-2, 5]}
+        distance={1}
+      >
+        <View style={styles.buttonContainer}>
+          <Pressable style={styles.button} onPress={getQuotes}>
+            <Text style={styles.buttonText}>Show me more</Text>
+          </Pressable>
+        </View>
+      </Shadow>
     </SafeAreaView>
   );
 }
@@ -164,8 +175,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontFamily: "LondrinaSolid",
   },
+  buttonContainer: {
+    borderRadius: 50,
+  },
   button: {
-    width: "60%",
     backgroundColor: "#FFDE00",
     color: "black",
     borderWidth: 1,
@@ -173,9 +186,13 @@ const styles = StyleSheet.create({
     borderColor: "black",
     alignItems: "center",
     padding: 10,
+    width: 200,
   },
   buttonText: {
     fontSize: 18,
     fontFamily: "MergeOne-Regular",
+  },
+  shadow: {
+    alignSelf: "stretch",
   },
 });
