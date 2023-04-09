@@ -44,10 +44,18 @@ export default function InitialScreen({ navigation }) {
         </View>
         <View style={styles.iconsContainer}>
           <Pressable onPress={playSound}>
-            <Image
-              style={styles.icon}
-              source={require("../assets/soundIcon.png")}
-            />
+            {isPlayingSound && (
+              <Image
+                style={styles.icon}
+                source={require("../assets/sound.png")}
+              />
+            )}
+            {!isPlayingSound && (
+              <Image
+                style={styles.icon}
+                source={require("../assets/sound-mute.png")}
+              />
+            )}
           </Pressable>
           <Pressable
             onPress={() => {
@@ -55,7 +63,7 @@ export default function InitialScreen({ navigation }) {
             }}
           >
             <Image
-              style={styles.icon}
+              style={styles.iconEnter}
               resizeMode="contain"
               source={require("../assets/enter.png")}
             />
@@ -93,8 +101,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   icon: {
-    height: 40,
+    height: 35,
     width: 50,
+    margin: 30,
+  },
+  iconEnter: {
+    height: 45,
+    width: 60,
     margin: 30,
   },
 });
