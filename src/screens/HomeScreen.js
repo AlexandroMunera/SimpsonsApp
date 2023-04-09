@@ -42,13 +42,10 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
+      <View style={{ width: "100%" }}>
         <View style={styles.header}>
           <Image style={styles.logo} source={require("../assets/logo.png")} />
-          <Image
-            style={styles.icon}
-            source={require("../assets/soundIcon.png")}
-          />
+          <Image style={styles.icon} source={require("../assets/menu.png")} />
         </View>
 
         <View style={styles.search}>
@@ -100,7 +97,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   logo: {
-    width: 120,
+    width: 125,
     height: 70,
   },
   icon: {
@@ -118,14 +115,13 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    margin: 12,
     padding: 5,
     paddingLeft: 15,
     marginTop: 10,
     backgroundColor: "white",
     color: "#898989",
     borderRadius: 10,
-    marginTop: 20,
+    marginTop: 25,
   },
   card: {
     minHeight: 350,

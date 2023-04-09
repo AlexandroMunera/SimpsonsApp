@@ -5,8 +5,34 @@ import {
   Pressable,
   Image,
 } from "react-native";
+import { useEffect, useState } from "react";
+import { Audio } from "expo-av";
 
 export default function InitialScreen({ navigation }) {
+  const [sound, setSound] = useState();
+  const [isPlayingSound, setIsPlayingSound] = useState(false);
+
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../assets/song.mp3")
+    );
+    setSound(sound);
+    setIsPlayingSound(!isPlayingSound);
+
+    !isPlayingSound === true
+      ? await sound.playAsync()
+      : await sound.stopAsync();
+  }
+
+  useEffect(() => {
+    return sound
+      ? () => {
+          console.log("Unloading Sound");
+          sound.unloadAsync();
+        }
+      : undefined;
+  }, [sound]);
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -18,7 +44,7 @@ export default function InitialScreen({ navigation }) {
           <Image style={styles.logo} source={require("../assets/logo.png")} />
         </View>
         <View style={styles.iconsContainer}>
-          <Pressable onPress={() => {}}>
+          <Pressable onPress={playSound}>
             <Image
               style={styles.icon}
               source={require("../assets/soundIcon.png")}
