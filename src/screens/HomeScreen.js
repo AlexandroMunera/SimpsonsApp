@@ -10,17 +10,22 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Shadow } from "react-native-shadow-2";
+import Spinner from "react-native-loading-spinner-overlay";
 
 import { getQuotesByCharacter, getSimpsonsApi } from "../api/simpsonsAPI";
 
 export default function HomeScreen({ navigation }) {
   const [text, onChangeText] = useState("");
-  const [data, setData] = useState({});
+  const [data, setData] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
   const getQuotes = () => {
+    setIsLoading(true);
+
     getSimpsonsApi()
       .then((response) => {
         setData(response[0]);
+        setIsLoading(false);
       })
       .catch(() => {
         navigation.navigate("Error");
@@ -28,9 +33,12 @@ export default function HomeScreen({ navigation }) {
   };
 
   const getQuotesByText = () => {
+    setIsLoading(true);
+
     getQuotesByCharacter(text)
       .then((response) => {
         setData(response[0]);
+        setIsLoading(false);
       })
       .catch(() => {
         navigation.navigate("Error");
@@ -43,6 +51,12 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Spinner
+        visible={isLoading}
+        textContent={"Loading..."}
+        textStyle={styles.spinnerTextStyle}
+        animation="fade"
+      />
       <View style={{ width: "100%" }}>
         <View style={styles.header}>
           <Image style={styles.logo} source={require("../assets/logo.png")} />
@@ -63,17 +77,17 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.card}>
         <View style={styles.quoteContainer}>
           <ScrollView showsVerticalScrollIndicator={false}>
-            <Text style={styles.quoteText}> {data.quote} </Text>
+            <Text style={styles.quoteText}> {data?.quote} </Text>
           </ScrollView>
           <Image
             style={styles.characterImage}
             resizeMode="contain"
             source={{
-              uri: data.image,
+              uri: data?.image,
             }}
           />
         </View>
-        <Text style={styles.quoteAuthor}>{data.character}</Text>
+        <Text style={styles.quoteAuthor}>{data?.character}</Text>
       </View>
 
       <Shadow
@@ -194,5 +208,9 @@ const styles = StyleSheet.create({
   },
   shadow: {
     alignSelf: "stretch",
+  },
+  spinnerTextStyle: {
+    color: "white",
+    fontSize: 30,
   },
 });
